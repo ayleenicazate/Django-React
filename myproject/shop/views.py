@@ -5,10 +5,18 @@ from rest_framework import viewsets
 from .models import Product, Cart
 from .serializers import ProductSerializer, CartSerializer
 from django.http import HttpResponse
+from django.template import loader
 
 def main(request):
-    return HttpResponse("<h1>Hello</h1>")
+    template = loader.get_template('index.html')
+    return HttpResponse(template.render())
 
+def shop(request):
+  template = loader.get_template('index.html')
+  return HttpResponse(template.render())
+
+
+#serializadores DRF
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
